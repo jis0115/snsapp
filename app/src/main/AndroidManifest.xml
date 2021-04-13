@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SnsApp"
         android:name=".SnsAppApplication">
-        <activity android:name=".presentation.ui.MainActivity">
+        <activity android:name=".presentation.ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
