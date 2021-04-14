@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jis.lonepine.snsapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SnsApp"
-        android:name=".SnsAppApplication">
-        <activity android:name=".presentation.ui.main.MainActivity">
+        android:name=".SnsAppApplication"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".presentation.ui.main.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

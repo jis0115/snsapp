@@ -2,8 +2,19 @@ package jis.lonepine.snsapp.presentation.di
 
 import jis.lonepine.snsapp.BuildConfig
 import jis.lonepine.snsapp.data.remote.SnsAppApi
+import jis.lonepine.snsapp.domain.repository.CardsRepository
+import jis.lonepine.snsapp.domain.repository.HomeRepository
+import jis.lonepine.snsapp.domain.repository.UserRepository
+import jis.lonepine.snsapp.domain.usecase.*
+import jis.lonepine.snsapp.presentation.ui.card.CardViewModel
+import jis.lonepine.snsapp.presentation.ui.feed.FeedViewModel
+import jis.lonepine.snsapp.presentation.ui.main.MainViewModel
+import jis.lonepine.snsapp.presentation.ui.signin.SignInViewModel
+import jis.lonepine.snsapp.presentation.ui.signup.SignUpViewModel
+import jis.lonepine.snsapp.presentation.ui.userinfo.UserInfoViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -39,108 +50,28 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-//    factory { CommonRepository(get(),get()) }
-//    factory { NotificationRepository(get()) }
-//    factory { ShopRepository(get()) }
-//    factory { GenieBoxRepository(get(),get()) }
-//    factory { UserRepository(get(),get()) }
-//    factory { CustomerServiceRepository(get()) }
+    factory { CardsRepository(get()) }
+    factory { HomeRepository(get()) }
+    factory { UserRepository(get()) }
 }
 
 val useCaseModule = module {
-
-//    factory { LoadConfigUseCase(get()) } //앱 초기 실행시 API-001	앱기본설정정보 로그
-//
-//    factory { HomeUseCase(get()) } // API-002	Home 정보노출
-//
-//    factory { (TickerUseCase(get())) } // API-003	Ticker 정보
-//
-//    factory { MyServiceUseCase(get()) } // API-004	나의서비스
-//
-//    factory { LogoutUseCase(get()) } // API-005	로그아웃
-//
-//    factory { LoginUseCase(get()) } // API-006	로그인
-//
-//    factory { ChangePasswordUseCase(get()) } // API-007	비밀번호 변경
-//
-//    factory { AuthenticationNumberUseCase(get()) } // API-008	sms 인증번호 받기
-//
-//    factory { UnLockUseCase(get()) } // API-009	잠금해제
-//
-//    factory { SignUpUseCase(get()) } // API-010	회원가입
-//
-//    factory { UpdateProfileUseCase(get()) } // API-011	회원정보 업데이트
-//
-//    factory { SendSMSCheckUseCase(get()) } // API-012	아이디찾기
-//    factory { JoinCheckUseCase(get()) } // API-013	회원가입정보 체크
-//
-//    factory { ReceiveTempPasswordUseCase(get()) } // API-014	임시비밀번호 받기
-//
-//    factory { ChangeAppSettingUseCase(get()) } // API-015	앱 설정 변경
-//
-//    factory { MyPageUseCase(get()) } // API-016	마이페이지
-//
-//    factory { MyProfileUseCase(get()) } // API-017	회원정보
-//
-//    factory { ChangeMyProfileUseCase(get()) } // API-018	회원정보 수정
-//
-//    factory { MyCombinationListUseCase(get()) } //API-019	나의 조합내역(조합번호)
-//
-//    factory { DeleteCombinationUseCase(get()) } // API-020	조합 삭제
-//    factory { MyCombinationMarkingPaperUseCase(get()) } // API-021	나의조합내역(마킹용지보기)
-//
-//    factory { WithdrawalMemberInfoUseCase(get()) } // API-022	탈퇴회원정보
-//    factory { WithdrawalMemberUseCase(get()) } // API-023	회원탈퇴
-//
-//    factory { GenieBoxMainUseCase(get()) } //API-024	지니박스 정보
-//
-//
-//    factory { (GenieBoxSelectUseCase(get())) } //API-025	지니박스 선택상자 정보
-//
-//    factory { OpenGenieBoxUseCase(get()) } // API-026	지니박스 추천조합 받기
-//
-//    factory { GenieBoxResultInfoUseCase(get()) }// API-027	지니박스 성적
-//
-//    factory { GenieBoxCombinationInfoUseCase(get()) } // API-028	조합설명
-//
-//    factory { InAppItemListUseCase(get()) } // API-029	인앱상품 리스트
-//
-//    factory { BuyInAppUseCase(get()) } // API-030	상품 구매
-//    factory { BuyFreeInAppUseCase(get()) } // API-040 // 무료상품구매
-//
-//    factory { NoticeUseCase(get()) } // API-031	공지사항
-//
-//    factory { GetQuestionOptionUseCase(get()) } // api-032 질문유형 가져오기
-//
-//    factory { WritePersonalInquiryUseCase(get()) } // API-033	1:1 문의 등록
-//    factory { LoadPersonalInquiryListUseCase(get()) } // API-034	1:1 문의 내역
-//
-//    factory { NotificationUseCase(get()) } //API-035	알림
-//    factory { DeletePushListUseCase(get()) } // API-036
-//
-//    factory { GetGradeSearchUseCase(get()) } // API-038
-//
-//
-//
-//
-//
-//    factory { CheckPermissionVisibleUseCase(get()) }
-//    factory { SetVisiblePermissionUseCase(get()) }
-//
-//    factory { CheckMainCoachMarkUseCase(get()) }
-//    factory { SetVisibleMainCoachMarkUseCase(get()) }
-//
-//
-//    //local에 ci 저장
-//    factory { InsertCIUseCase(get()) }
-//    //local에 ci 삭제
-//    factory { DeleteCIUseCase(get()) }
-//
-//    factory { LoadCIUseCase(get()) }
-
+    factory { GetCardDetailUseCase(get()) }
+    factory { GetCardListUseCase(get()) }
+    factory { GetHomeUseCase(get()) }
+    factory { GetUserInfoUseCase(get()) }
+    factory { SignInUseCase(get()) }
+    factory { SignUpUseCase(get()) }
 }
 
 val viewModelModule = module {
+    viewModel { MainViewModel() }
+    viewModel { FeedViewModel(get()) }
+    viewModel { SignUpViewModel(get()) }
+    viewModel { SignInViewModel(get()) }
+    viewModel { CardViewModel(get()) }
+    viewModel { UserInfoViewModel(get()) }
+
 //    viewModel { SplashViewModel(get(),get(),get(),get(),get()) }
 //    viewModel { SplashViewModel(get(),get(),get(),get(),get()) }
 //    viewModel { MainViewModel(get(),get()) }

@@ -3,11 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="jis.lonepine.snsapp.presentation.ui.main.MainViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.ui.main.MainActivity">
         <LinearLayout
+            android:id="@+id/button_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -20,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="로그인"
+                android:onClick="@{()->viewModel.signInTouched()}"
                 />
             <Button
                 android:layout_width="wrap_content"
@@ -27,22 +34,33 @@
                 android:text="가입"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
+                android:onClick="@{()->viewModel.signUpTouched()}"
                 />
         </LinearLayout>
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/button_area"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
             <androidx.viewpager.widget.PagerTitleStrip
                 android:id="@+id/pager_title_strip"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:background="#66aaff"
+
                 />
         </androidx.viewpager.widget.ViewPager>
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/button_area"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
