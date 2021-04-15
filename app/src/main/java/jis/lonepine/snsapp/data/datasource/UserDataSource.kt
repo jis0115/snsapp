@@ -11,4 +11,6 @@ interface UserDataSource {
     fun signUp(request:SignUpRequest):Single<SignUpResponse>
     fun signIn(request:SignInRequest):Single<SignInResponse>
     fun getUserInfo(id:Int):Single<UserInfoResponse>
+    fun getUserId():Int
+    fun setUserId(id:Int)
 }

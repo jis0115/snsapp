@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">SnsApp</string>
 
-
     <string name="card_description">카드 설명: %s</string>
-
     <string name="writer">작성자: %s</string>
     <string name="writer_introduction">소개: %s</string>
 </resources>

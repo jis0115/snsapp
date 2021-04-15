@@ -8,12 +8,23 @@ import jis.lonepine.snsapp.presentation.base.DisposableViewModel
 import jis.lonepine.snsapp.presentation.base.SingleLiveEvent
 
 class SignInViewModel(private val signInUseCase: SignInUseCase):DisposableViewModel() {
-
-
     private val _signInSuccess = SingleLiveEvent<Int>()
     val signInSuccess:LiveData<Int> = _signInSuccess
     fun signIn(nickName:String, pwd:String)
     {
+        addDisposable(
+                signInUseCase.signIn(
+                        nickName,
+                        pwd,
+                        success = {
+                            _signInSuccess.value = it
+                        },
+                        fail={
+                            _showToast.postValue(it)
+                        }
+                )
+        )
+        /*
         addDisposable(
             signInUseCase.signIn(nickName,pwd)
                 .subscribeOn(Schedulers.io())
@@ -31,6 +42,8 @@ class SignInViewModel(private val signInUseCase: SignInUseCase):DisposableViewMo
 
                 })
         )
+
+         */
 
     }
 }

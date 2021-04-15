@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="jis.lonepine.snsapp.data.entity.Card" />
+        <variable
+            name="viewModel"
+            type="jis.lonepine.snsapp.presentation.ui.common.CardItemViewModel" />
+    </data>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        setGlideImageUrl="@{item.img_url}"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:onClick="@{()->viewModel.cardTouched(item.id)}"
+        />
+</layout>

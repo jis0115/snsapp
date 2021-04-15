@@ -3,9 +3,11 @@ package jis.lonepine.snsapp.presentation.ui.card
 import androidx.lifecycle.LiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import jis.lonepine.snsapp.data.entity.Card
 import jis.lonepine.snsapp.data.entity.User
 import jis.lonepine.snsapp.domain.usecase.GetCardDetailUseCase
 import jis.lonepine.snsapp.presentation.base.DisposableViewModel
+import jis.lonepine.snsapp.presentation.base.NotNullMutableLiveData
 import jis.lonepine.snsapp.presentation.base.SingleLiveEvent
 
 class CardViewModel(private val getCardDetailUseCase: GetCardDetailUseCase):DisposableViewModel() {
@@ -21,6 +23,10 @@ class CardViewModel(private val getCardDetailUseCase: GetCardDetailUseCase):Disp
 
     private val _writerInfo = SingleLiveEvent<User>()
     val writerInfo:LiveData<User> = _writerInfo
+
+    private val _recommendCardList = NotNullMutableLiveData(listOf<Card>())
+    val recommendCardList:LiveData<List<Card>> = _recommendCardList
+
     fun load(id:Int)
     {
         addDisposable(
@@ -37,6 +43,7 @@ class CardViewModel(private val getCardDetailUseCase: GetCardDetailUseCase):Disp
                         _cardDescription.value = it.card.description
 
                         _writerInfo.value = it.user
+                        _recommendCardList.value = it.recommend_cards
                     }
                     else if(it.msg?.isNotEmpty() == true)
                     {
@@ -48,10 +55,12 @@ class CardViewModel(private val getCardDetailUseCase: GetCardDetailUseCase):Disp
         )
     }
 
-    private val _showUserInfo = SingleLiveEvent<Int>()
-    val showUserInfo:LiveData<Int> = _showUserInfo
-    fun userInfoTouched(userId:Int)
-    {
-        _showUserInfo.value = userId
-    }
+//    private val _showUserInfo = SingleLiveEvent<Int>()
+//    val showUserInfo:LiveData<Int> = _showUserInfo
+//    fun userInfoTouched(userId:Int)
+//    {
+//        _showUserInfo.value = userId
+//    }
+
+
 }

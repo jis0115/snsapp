@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="items"
+            type="java.util.List&lt;jis.lonepine.snsapp.data.entity.Card>" />
+        <variable
+            name="viewModel"
+            type="jis.lonepine.snsapp.presentation.ui.common.CardItemViewModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="인기 카드 : 카드를 클릭해보세요."
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            setCardItems="@{items}"
+            viewModel="@{viewModel}"
+            />
+
+    </LinearLayout>
+</layout>

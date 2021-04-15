@@ -5,6 +5,12 @@
         <variable
             name="viewModel"
             type="jis.lonepine.snsapp.presentation.ui.card.CardViewModel" />
+        <variable
+            name="cardItemViewModel"
+            type="jis.lonepine.snsapp.presentation.ui.common.CardItemViewModel" />
+        <variable
+            name="userItemViewModel"
+            type="jis.lonepine.snsapp.presentation.ui.common.UserItemViewModel" />
     </data>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
@@ -49,7 +55,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:onClick="@{()->viewModel.userInfoTouched(viewModel.writerInfo.id)}">
+                    android:onClick="@{()->userItemViewModel.userInfoTouched(viewModel.writerInfo.id)}"
+                    android:minHeight="50dp">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -61,11 +68,22 @@
                         android:text="@{@string/writer_introduction(viewModel.writerInfo.introduction)}"
                         />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#222222"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="추천 카드 : 카드를 클릭해보세요."/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"
+                    setCardItems="@{viewModel.recommendCardList}"
+                    viewModel="@{cardItemViewModel}"
                     />
             </LinearLayout>
 

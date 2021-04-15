@@ -1,8 +1,8 @@
 package jis.lonepine.snsapp.presentation.ui.main
 
 import android.graphics.Color
+import android.util.Log
 import android.view.Gravity
-import android.view.View.TEXT_ALIGNMENT_CENTER
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -10,7 +10,8 @@ import jis.lonepine.snsapp.R
 import jis.lonepine.snsapp.databinding.ActivityMainBinding
 import jis.lonepine.snsapp.presentation.base.BindingActivity
 import jis.lonepine.snsapp.presentation.extension.observe
-import jis.lonepine.snsapp.presentation.extension.showFragment
+import jis.lonepine.snsapp.presentation.extension.add
+import jis.lonepine.snsapp.presentation.extension.replace
 import jis.lonepine.snsapp.presentation.ui.feed.FeedFragment
 import jis.lonepine.snsapp.presentation.ui.home.HomeFragment
 import jis.lonepine.snsapp.presentation.ui.signin.SignInFragment
@@ -22,31 +23,22 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     override fun initView() {
         binding.viewModel = viewModel.apply {
             observe(showSignIn){
-                //fragment_container_view
-                showFragment(R.id.fragment_container_view,SignInFragment())
+                replace(R.id.fragment_container_view,SignInFragment())
             }
 
             observe(showSignUp){
-                showFragment(R.id.fragment_container_view,SignUpFragment())
-//                parentFragmentManager.beginTransaction().apply {
-//                    replace(R.id.fragment_container_body, LoginFragment())
-//                    addToBackStack(null)
-//                    commit()
-//                }
+                replace(R.id.fragment_container_view,SignUpFragment())
             }
         }
 
-
+        supportFragmentManager.addOnBackStackChangedListener {
+            viewModel.checkLogin()
+        }
 
         binding.viewPager.adapter = ScreenSlidePagerAdapter(supportFragmentManager)
-        binding.viewPager
-
-
-
         binding.pagerTitleStrip.setTextColor(Color.WHITE)
         binding.pagerTitleStrip.setGravity(Gravity.CENTER_VERTICAL)
     }
-
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getCount(): Int = 2

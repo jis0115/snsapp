@@ -7,7 +7,10 @@ import jis.lonepine.snsapp.domain.repository.HomeRepository
 import jis.lonepine.snsapp.domain.repository.UserRepository
 import jis.lonepine.snsapp.domain.usecase.*
 import jis.lonepine.snsapp.presentation.ui.card.CardViewModel
+import jis.lonepine.snsapp.presentation.ui.common.CardItemViewModel
+import jis.lonepine.snsapp.presentation.ui.common.UserItemViewModel
 import jis.lonepine.snsapp.presentation.ui.feed.FeedViewModel
+import jis.lonepine.snsapp.presentation.ui.home.HomeViewModel
 import jis.lonepine.snsapp.presentation.ui.main.MainViewModel
 import jis.lonepine.snsapp.presentation.ui.signin.SignInViewModel
 import jis.lonepine.snsapp.presentation.ui.signup.SignUpViewModel
@@ -20,19 +23,12 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
+//TODO: dagger 이전 koin 으로 미리 작업 후 dagger 로 전환 예정..
 val interceptor = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
 }
 
-//val tls = ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
-//    .allEnabledTlsVersions()
-//    .allEnabledCipherSuites()
-//    .build()
-
 val client = OkHttpClient.Builder().addInterceptor(interceptor)
-//    .connectionSpecs(
-//        listOf(ConnectionSpec.CLEARTEXT,tls)
-//    )
     .build()
 
 val retrofit: Retrofit = Retrofit
@@ -62,47 +58,21 @@ val useCaseModule = module {
     factory { GetUserInfoUseCase(get()) }
     factory { SignInUseCase(get()) }
     factory { SignUpUseCase(get()) }
+    factory { LoginCheckUseCase(get()) }
+    factory { LogOutUseCase(get()) }
 }
 
 val viewModelModule = module {
-    viewModel { MainViewModel() }
+    viewModel { MainViewModel(get(),get()) }
     viewModel { FeedViewModel(get()) }
     viewModel { SignUpViewModel(get()) }
     viewModel { SignInViewModel(get()) }
     viewModel { CardViewModel(get()) }
     viewModel { UserInfoViewModel(get()) }
-
-//    viewModel { SplashViewModel(get(),get(),get(),get(),get()) }
-//    viewModel { SplashViewModel(get(),get(),get(),get(),get()) }
-//    viewModel { MainViewModel(get(),get()) }
-//    viewModel { HomeViewModel(get()) }
-//
-//    viewModel { AccessPermissionInfoViewModel(get()) }
-//
-//    viewModel { GnbMenuViewModel(get()) }
-//    viewModel { GnbHeaderViewModel() }
-//    viewModel { MyServiceViewModel(get(),get(),get()) }
-//    viewModel { SettingViewModel(get(),get()) }
-//    viewModel { LoginViewModel(get(),get()) }
-//    viewModel { SignUpViewModel(get(),get(),get(),get()) }
-//    viewModel { SelectGenderAndAgeViewModel(get(),get()) }
-//    viewModel { SignUpCompletedViewModel() }
-//    viewModel { AllMenuViewModel() }
-//    viewModel { VersionInfoViewModel() }
-//    viewModel { FindIdViewModel(get(),get()) }
-//    viewModel { FindPasswordViewModel(get(),get()) }
-//    viewModel { ChangePasswordViewModel(get()) }
-//    viewModel { FavoriteBoxViewModel() }
-//    viewModel { ShopViewModel(get(),get(),get()) }
-//    viewModel { MyPageViewModel(get(),get(),get()) }
-//
-//    viewModel { VerificationEditProfileViewModel(get()) }
-
+    viewModel { HomeViewModel(get()) }
+    viewModel { CardItemViewModel() }
+    viewModel { UserItemViewModel() }
 }
-
-//val preference = module {
-//    single { androidx.preference.PreferenceManager.getDefaultSharedPreferences(get()) }
-//}
 
 val moduleList = listOf(
     viewModelModule, useCaseModule, repositoryModule,networkModule
