@@ -7,9 +7,12 @@ import jis.lonepine.snsapp.domain.usecase.GetHomeUseCase
 import jis.lonepine.snsapp.presentation.base.DisposableViewModel
 import jis.lonepine.snsapp.presentation.base.NotNullMutableLiveData
 import jis.lonepine.snsapp.presentation.base.SingleLiveEvent
+import jis.lonepine.snsapp.presentation.di.ActivityScope
 import jis.lonepine.snsapp.presentation.ui.home.model.HomeUIModel
+import javax.inject.Inject
 
-class HomeViewModel(private val getHomeUseCase: GetHomeUseCase):DisposableViewModel() {
+@ActivityScope
+class HomeViewModel @Inject constructor(private val getHomeUseCase: GetHomeUseCase):DisposableViewModel() {
     private val _homeItems = NotNullMutableLiveData(listOf<HomeUIModel>())
     val homeItems:LiveData<List<HomeUIModel>> = _homeItems
 

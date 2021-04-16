@@ -4,8 +4,9 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import jis.lonepine.snsapp.data.remote.request.SignUpRequest
 import jis.lonepine.snsapp.domain.repository.UserRepository
+import javax.inject.Inject
 
-class SignUpUseCase(private val userRepository: UserRepository) {
+class SignUpUseCase @Inject constructor(private val userRepository: UserRepository) {
     fun signUp(nickName:String, introduction:String,pwd:String,success:()->Unit,fail:(String)->Unit):Disposable{
         return userRepository.signUp(request = SignUpRequest(nickName, introduction, pwd))
                 .subscribeOn(Schedulers.io())
@@ -22,23 +23,5 @@ class SignUpUseCase(private val userRepository: UserRepository) {
                 },{
 
                 })
-
-
-        /*
-        .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if(it.ok)
-                    {
-                        _signUpSuccess.value = it.user_id
-                    }
-                    else if (it.error_msg?.isNotEmpty() == true)
-                    {
-                        _showToast.postValue(it.error_msg)
-                    }
-                },{
-                    it.printStackTrace()
-                })
-         */
     }
 }

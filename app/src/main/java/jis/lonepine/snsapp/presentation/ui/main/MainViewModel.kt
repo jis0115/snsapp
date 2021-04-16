@@ -6,8 +6,11 @@ import jis.lonepine.snsapp.domain.usecase.LogOutUseCase
 import jis.lonepine.snsapp.presentation.base.DisposableViewModel
 import jis.lonepine.snsapp.presentation.base.NotNullMutableLiveData
 import jis.lonepine.snsapp.presentation.base.SingleLiveEvent
+import jis.lonepine.snsapp.presentation.di.ActivityScope
+import javax.inject.Inject
 
-class MainViewModel(
+@ActivityScope
+class MainViewModel @Inject constructor(
         private val loginCheckUseCase: LoginCheckUseCase,
         private val logOutUseCase: LogOutUseCase
         ):DisposableViewModel() {

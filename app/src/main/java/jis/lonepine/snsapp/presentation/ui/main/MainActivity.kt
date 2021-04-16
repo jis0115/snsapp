@@ -1,25 +1,30 @@
 package jis.lonepine.snsapp.presentation.ui.main
 
 import android.graphics.Color
-import android.util.Log
+import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import jis.lonepine.snsapp.R
+import jis.lonepine.snsapp.SnsAppApplication
 import jis.lonepine.snsapp.databinding.ActivityMainBinding
 import jis.lonepine.snsapp.presentation.base.BindingActivity
 import jis.lonepine.snsapp.presentation.extension.observe
-import jis.lonepine.snsapp.presentation.extension.add
 import jis.lonepine.snsapp.presentation.extension.replace
 import jis.lonepine.snsapp.presentation.ui.feed.FeedFragment
 import jis.lonepine.snsapp.presentation.ui.home.HomeFragment
 import jis.lonepine.snsapp.presentation.ui.signin.SignInFragment
 import jis.lonepine.snsapp.presentation.ui.signup.SignUpFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
-    private val viewModel:MainViewModel by viewModel()
+    @Inject
+    lateinit var viewModel:MainViewModel
+    override fun onCreate(savedInstanceState: Bundle?) {
+        (application as SnsAppApplication).appComponent.mainComponent().create().inject(this)
+        super.onCreate(savedInstanceState)
+    }
     override fun initView() {
         binding.viewModel = viewModel.apply {
             observe(showSignIn){

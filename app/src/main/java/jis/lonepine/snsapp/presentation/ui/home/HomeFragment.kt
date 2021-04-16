@@ -1,7 +1,9 @@
 package jis.lonepine.snsapp.presentation.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import jis.lonepine.snsapp.R
+import jis.lonepine.snsapp.SnsAppApplication
 import jis.lonepine.snsapp.databinding.FragmentHomeBinding
 import jis.lonepine.snsapp.presentation.base.BindingFragment
 import jis.lonepine.snsapp.presentation.extension.observe
@@ -10,12 +12,20 @@ import jis.lonepine.snsapp.presentation.ui.card.CardFragment
 import jis.lonepine.snsapp.presentation.ui.common.CardItemViewModel
 import jis.lonepine.snsapp.presentation.ui.common.UserItemViewModel
 import jis.lonepine.snsapp.presentation.ui.userinfo.UserInfoFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class HomeFragment:BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    private val cardItemViewModel:CardItemViewModel by viewModel()
-    private val userItemViewModel:UserItemViewModel by viewModel()
-    private val viewModel:HomeViewModel by viewModel()
+    @Inject
+    lateinit var cardItemViewModel:CardItemViewModel
+    @Inject
+    lateinit var userItemViewModel:UserItemViewModel
+    @Inject
+    lateinit var viewModel:HomeViewModel
+
+    override fun onAttach(context: Context) {
+        (requireActivity().application as SnsAppApplication).appComponent.mainComponent().create().inject(this)
+        super.onAttach(context)
+    }
     override fun initView() {
 
         binding.userItemViewModel = userItemViewModel.apply {

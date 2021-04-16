@@ -1,7 +1,9 @@
 package jis.lonepine.snsapp.presentation.ui.card
 
+import android.content.Context
 import android.os.Bundle
 import jis.lonepine.snsapp.R
+import jis.lonepine.snsapp.SnsAppApplication
 import jis.lonepine.snsapp.databinding.FragmentCardBinding
 import jis.lonepine.snsapp.presentation.base.BindingFragment
 import jis.lonepine.snsapp.presentation.extension.observe
@@ -10,12 +12,20 @@ import jis.lonepine.snsapp.presentation.extension.showToast
 import jis.lonepine.snsapp.presentation.ui.common.CardItemViewModel
 import jis.lonepine.snsapp.presentation.ui.common.UserItemViewModel
 import jis.lonepine.snsapp.presentation.ui.userinfo.UserInfoFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class CardFragment:BindingFragment<FragmentCardBinding>(R.layout.fragment_card) {
-    private val viewModel:CardViewModel by viewModel()
-    private val cardItemViewModel:CardItemViewModel by viewModel()
-    private val userItemViewModel: UserItemViewModel by viewModel()
+    @Inject
+    lateinit var viewModel:CardViewModel
+    @Inject
+    lateinit var cardItemViewModel:CardItemViewModel
+    @Inject
+    lateinit var userItemViewModel: UserItemViewModel
+
+    override fun onAttach(context: Context) {
+        (requireActivity().application as SnsAppApplication).appComponent.cardComponent().create().inject(this)
+        super.onAttach(context)
+    }
     override fun initView() {
         binding.userItemViewModel = userItemViewModel.apply {
             observe(showUserInfo){

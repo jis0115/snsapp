@@ -9,8 +9,11 @@ import jis.lonepine.snsapp.domain.usecase.GetCardDetailUseCase
 import jis.lonepine.snsapp.presentation.base.DisposableViewModel
 import jis.lonepine.snsapp.presentation.base.NotNullMutableLiveData
 import jis.lonepine.snsapp.presentation.base.SingleLiveEvent
+import jis.lonepine.snsapp.presentation.di.ActivityScope
+import javax.inject.Inject
 
-class CardViewModel(private val getCardDetailUseCase: GetCardDetailUseCase):DisposableViewModel() {
+@ActivityScope
+class CardViewModel @Inject constructor(private val getCardDetailUseCase: GetCardDetailUseCase):DisposableViewModel() {
 
     private val _cardImageUrl = SingleLiveEvent<String>()
     val cardImageUrl:LiveData<String> = _cardImageUrl

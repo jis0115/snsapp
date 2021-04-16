@@ -9,8 +9,11 @@ import jis.lonepine.snsapp.domain.usecase.GetCardListUseCase
 import jis.lonepine.snsapp.presentation.base.DisposableViewModel
 import jis.lonepine.snsapp.presentation.base.NotNullMutableLiveData
 import jis.lonepine.snsapp.presentation.base.SingleLiveEvent
+import jis.lonepine.snsapp.presentation.di.ActivityScope
+import javax.inject.Inject
 
-class FeedViewModel(private val getCardListUseCase: GetCardListUseCase):DisposableViewModel() {
+@ActivityScope
+class FeedViewModel @Inject constructor(private val getCardListUseCase: GetCardListUseCase):DisposableViewModel() {
     private val _feedList = NotNullMutableLiveData(listOf<Card>())
     val feedList:LiveData<List<Card>> = _feedList
 

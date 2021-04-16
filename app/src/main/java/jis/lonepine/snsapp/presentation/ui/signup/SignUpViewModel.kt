@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import jis.lonepine.snsapp.domain.usecase.SignUpUseCase
 import jis.lonepine.snsapp.presentation.base.DisposableViewModel
 import jis.lonepine.snsapp.presentation.base.SingleLiveEvent
+import jis.lonepine.snsapp.presentation.di.ActivityScope
+import javax.inject.Inject
 
-class SignUpViewModel(private val signUpUseCase: SignUpUseCase):DisposableViewModel() {
+@ActivityScope
+class SignUpViewModel @Inject constructor(private val signUpUseCase: SignUpUseCase):DisposableViewModel() {
     private val _inputNickName = SingleLiveEvent<Any>()
     val inputNickName:LiveData<Any> = _inputNickName
 

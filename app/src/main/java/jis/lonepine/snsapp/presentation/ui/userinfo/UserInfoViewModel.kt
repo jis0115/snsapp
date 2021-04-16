@@ -7,8 +7,9 @@ import jis.lonepine.snsapp.data.entity.User
 import jis.lonepine.snsapp.domain.usecase.GetUserInfoUseCase
 import jis.lonepine.snsapp.presentation.base.DisposableViewModel
 import jis.lonepine.snsapp.presentation.base.SingleLiveEvent
+import javax.inject.Inject
 
-class UserInfoViewModel(private val getUserInfoUseCase: GetUserInfoUseCase):DisposableViewModel() {
+class UserInfoViewModel @Inject constructor(private val getUserInfoUseCase: GetUserInfoUseCase):DisposableViewModel() {
     private val _loadFinish = SingleLiveEvent<Any>()
     val loadFinish:LiveData<Any> = _loadFinish
 

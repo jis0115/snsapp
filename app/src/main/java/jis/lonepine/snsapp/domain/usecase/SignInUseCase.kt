@@ -5,8 +5,9 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import jis.lonepine.snsapp.data.remote.request.SignInRequest
 import jis.lonepine.snsapp.domain.repository.UserRepository
+import javax.inject.Inject
 
-class SignInUseCase(private val userRepository: UserRepository) {
+class SignInUseCase @Inject constructor(private val userRepository: UserRepository) {
     fun signIn(nickname:String, pwd:String,success:(Int)->Unit, fail:(String)->Unit):Disposable
     {
         return userRepository.signIn(SignInRequest(nickname, pwd))
