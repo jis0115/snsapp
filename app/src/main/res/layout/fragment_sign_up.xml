@@ -13,21 +13,21 @@
         <EditText android:id="@+id/et_nick_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="닉네임"/>
+            android:hint="@string/nick_name"/>
         <EditText android:id="@+id/et_introduction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="소개"
+            android:hint="@string/introduction"
             />
         <EditText android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="비밀번호"
+            android:hint="@string/password"
             />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="로그인"
+            android:text="@string/sign_up"
             android:onClick="@{()->viewModel.signUp(etNickName.getText().toString(),etIntroduction.getText().toString(),etPassword.getText().toString())}"
             />
     </LinearLayout>

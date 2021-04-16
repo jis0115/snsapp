@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="인기 유저 : 유저를 클릭해보세요."
+            android:text="@string/popular_user_title"
             />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

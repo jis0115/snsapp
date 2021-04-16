@@ -26,14 +26,14 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="로그인"
+                android:text="@string/sign_in"
                 android:onClick="@{()->viewModel.signInTouched()}"
                 android:visibility="@{viewModel.isLogin() ? View.GONE : View.VISIBLE}"
                 />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="가입"
+                android:text="@string/sign_up"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
                 android:onClick="@{()->viewModel.signUpTouched()}"
@@ -42,7 +42,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="로그아웃"
+                android:text="@string/sign_out"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
                 android:onClick="@{()->viewModel.logoutTouched()}"
