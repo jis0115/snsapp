@@ -14,6 +14,7 @@ import javax.inject.Inject
 
 @ActivityScope
 class FeedViewModel @Inject constructor(private val getCardListUseCase: GetCardListUseCase):DisposableViewModel() {
+    var isLoading = false
     private val _feedList = NotNullMutableLiveData(listOf<Card>())
     val feedList:LiveData<List<Card>> = _feedList
 
@@ -25,13 +26,14 @@ class FeedViewModel @Inject constructor(private val getCardListUseCase: GetCardL
 
     fun loadList()
     {
-        Log.e("jis","test")
         addDisposable(
             getCardListUseCase.getCardList(page, per)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doFinally {
+                    isLoading = false
+                }
                 .subscribe({
-                    Log.e("jis","test >> $it")
                     if (it.ok)
                     {
                         val newList = mutableListOf<Card>()
@@ -46,6 +48,17 @@ class FeedViewModel @Inject constructor(private val getCardListUseCase: GetCardL
         )
     }
 
+    fun loadMore()
+    {
+        if (isLoading)
+        {
+            return
+        }
+        isLoading = true
+        page++
+        loadList()
+    }
+
     fun reLoadList()
     {
         page = 1
@@ -54,6 +67,7 @@ class FeedViewModel @Inject constructor(private val getCardListUseCase: GetCardL
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally {
+                    isLoading = false
                     _loadFinish.call()
                 }
                 .subscribe({
