@@ -4,4 +4,11 @@
     <string name="card_description">카드 설명: %s</string>
     <string name="writer">작성자: %s</string>
     <string name="writer_introduction">소개: %s</string>
+
+    <string name="home">홈</string>
+    <string name="feed">사진피드</string>
+
+    <string name="insert_nick_name">닉네임을 입력해주세요.</string>
+    <string name="insert_introduction">소개글을 입력해주세요.</string>
+    <string name="insert_password">비밀번호를 입력해주세요.</string>
 </resources>

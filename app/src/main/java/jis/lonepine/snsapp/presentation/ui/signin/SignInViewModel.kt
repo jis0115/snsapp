@@ -1,8 +1,6 @@
 package jis.lonepine.snsapp.presentation.ui.signin
 
 import androidx.lifecycle.LiveData
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
 import jis.lonepine.snsapp.domain.usecase.SignInUseCase
 import jis.lonepine.snsapp.presentation.base.DisposableViewModel
 import jis.lonepine.snsapp.presentation.base.SingleLiveEvent

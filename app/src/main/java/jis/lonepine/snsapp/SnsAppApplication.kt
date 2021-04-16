@@ -9,7 +9,7 @@ class SnsAppApplication:MultiDexApplication() {
         initializeComponent()
     }
 
-    fun initializeComponent(): AppComponent {
+    private fun initializeComponent(): AppComponent {
         return DaggerAppComponent.factory().create(applicationContext)
     }
 }

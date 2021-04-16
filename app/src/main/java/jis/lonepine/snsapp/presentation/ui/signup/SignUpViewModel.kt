@@ -22,7 +22,6 @@ class SignUpViewModel @Inject constructor(private val signUpUseCase: SignUpUseCa
     val signUpSuccess:LiveData<Any> = _signUpSuccess
     fun signUp(nickName:String,introduction:String,pwd:String)
     {
-//        TODO: 기존 앱에서는 체크하지 않지만 있어야할것 같아추가함.
         if (nickName.isBlank())
         {
             _inputNickName.call()

@@ -55,10 +55,6 @@ class CardFragment:BindingFragment<FragmentCardBinding>(R.layout.fragment_card) 
                 binding.swipeRefreshLayout.isRefreshing = false
             }
 
-
-
-
-
             binding.swipeRefreshLayout.setOnRefreshListener {
                 loadData()
             }

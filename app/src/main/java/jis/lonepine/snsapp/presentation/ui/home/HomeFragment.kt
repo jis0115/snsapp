@@ -28,6 +28,7 @@ class HomeFragment:BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) 
     }
     override fun initView() {
 
+
         binding.userItemViewModel = userItemViewModel.apply {
             observe(showUserInfo){
                 activity?.add(R.id.fragment_container_view, UserInfoFragment().apply {

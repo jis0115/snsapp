@@ -36,7 +36,7 @@ class UserInfoFragment:BindingFragment<FragmentUserInfoBinding>(R.layout.fragmen
         }
     }
 
-    fun getUserInfo()
+    private fun getUserInfo()
     {
         arguments?.getInt("id")?.let {
             viewModel.getUserInfo(id = it)

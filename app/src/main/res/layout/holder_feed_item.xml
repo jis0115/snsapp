@@ -25,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="25dp"
             android:onClick="@{()->viewModel.cardTouched(item.id)}"
+            setTouchScale="@{1.1f}"
             />
         <TextView
             android:layout_width="match_parent"

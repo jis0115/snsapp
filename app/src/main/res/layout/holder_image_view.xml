@@ -16,5 +16,6 @@
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:onClick="@{()->viewModel.cardTouched(item.id)}"
+        setTouchScale="@{1.1f}"
         />
 </layout>

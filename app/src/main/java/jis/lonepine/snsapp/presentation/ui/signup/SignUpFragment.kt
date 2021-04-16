@@ -28,17 +28,17 @@ class SignUpFragment:BindingFragment<FragmentSignUpBinding>(R.layout.fragment_si
 
             observe(inputNickName)
             {
-                context?.showToast("닉네임을 입력해주세요.")
+                context?.showToast(R.string.insert_nick_name)
             }
 
             observe(inputIntroduction)
             {
-                context?.showToast("소개글을 입력해주세요.")
+                context?.showToast(R.string.insert_introduction)
             }
 
             observe(inputPassword)
             {
-                context?.showToast("비밀번호를 입력해주세요.")
+                context?.showToast(R.string.insert_password)
             }
 
             observe(signUpSuccess)

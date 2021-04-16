@@ -40,9 +40,5 @@ class FeedFragment:BindingFragment<FragmentFeedBinding>(R.layout.fragment_feed) 
 
             loadList()
         }
-
-
-
-
     }
 }
